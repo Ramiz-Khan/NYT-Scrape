@@ -1,17 +1,13 @@
 var mongoose = require("mongoose");
 
 var ArticleSchema = new mongoose.Schema ({
-    _id: {
-        type: String,
-        required: true
-    },
     title: {
         type: String,
         required: true
     },
     URL: {
         type: String,
-        required: true
+        required: false
     },
     summary: {
         type: String,

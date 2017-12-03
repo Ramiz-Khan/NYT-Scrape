@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-
+var request = require("request");
 
 var axios = require("axios");
 var cheerio = require("cheerio");
@@ -48,7 +48,6 @@ app.get("/scrape", function(req, res) {
       result.title = $(this)
         .text();
       result.URL = $(this)
-        .children("a")
         .attr("href");
 
       // Create a new Article using the `result` object built from scraping
@@ -56,7 +55,7 @@ app.get("/scrape", function(req, res) {
         .create(result)
         .then(function(dbArticle) {
           // If we were able to successfully scrape and save an Article, send a message to the client
-          res.send("Scrape Complete");
+          res.send(result);
         })
         .catch(function(err) {
           // If an error occurred, send it to the client
