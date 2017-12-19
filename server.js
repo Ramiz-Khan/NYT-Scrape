@@ -29,17 +29,17 @@ app.use(express.static("public"));
 if (process.env.MONGODB_URI) {
 
   mongoose.connect(process.env.MONGODB_URI);
-}
- else {
+
+} else {
   mongoose.Promise = Promise;  
   mongoose.connect("mongodb://localhost/Scraper_DB", {
   useMongoClient: true
-});
+  });
  }
 // Routes
 
 // A GET route for scraping the Dallas Morning News website
-app.get("/scrape", function(req, res) {
+app.get("/", function(req, res) {
   // First, we grab the body of the html with request
   axios.get("https://www.dallasnews.com/").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
@@ -131,7 +131,19 @@ app.post("/articles/:id", function(req, res) {
     });
 });
 
+var mcon = mongoose.connection;
+
+mcon.on("error", function(err) {
+
+  console.log("message error: " + err);
+
+})
+
 // Start the server
+mcon.once("open", function () {
+  console.log("mongo db connection works")
+})
+
 app.listen(PORT, function() {
   console.log("App running on port " + PORT + "!");
 });
