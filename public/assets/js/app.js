@@ -2,10 +2,25 @@ $.getJSON("/articles", function(data) {
 
     console.log(data);
 
-   // $.post("/")
-for (i =0 ; i<data.length ; i++) {
+   // if (data[i].URL) {
+        
 
-    $("ul#results ").append("<li>").text(data[i].title);
+// for (i =0 ; i<data.length ; i++) {
+
+
+
+//     $("#results ").append("<li><a href='" + data[i].URL + "'>" + data[i].title + "</a></li>");
     
+//     }
+    
+    
+// } else {
+
+    for (i =0 ; i<data.length ; i++) {        
+
+        $("#results ").append("<li>" + data[i].title + "</li>");
+
     }
+        
+//    }
 });
