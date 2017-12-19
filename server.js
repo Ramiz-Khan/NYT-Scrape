@@ -45,6 +45,9 @@ app.get("/scrape", function(req, res) {
       var result = {};
 
       // Add the text and href of every link, and save them as properties of the result object
+for (i=0 ; i < result.length; i ++) {
+
+
       result.title = $(this)
         .text();
       result.URL = $(this)
@@ -52,16 +55,18 @@ app.get("/scrape", function(req, res) {
 
       // Create a new Article using the `result` object built from scraping
       db.Article
-        .create(result)
+        .create(result[i])
         .then(function(dbArticle) {
           // If we were able to successfully scrape and save an Article, send a message to the client
-          res.send(result);
+          res.send(result[i]);
         })
         .catch(function(err) {
           // If an error occurred, send it to the client
           res.json(err);
+
+        
         });
-    });
+    };
   });
 });
 
