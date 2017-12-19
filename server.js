@@ -53,6 +53,8 @@ for (i=0 ; i < result.length; i ++) {
       result.URL = $(this)
         .attr("href");
 
+
+
       // Create a new Article using the `result` object built from scraping
       db.Article
         .create(result[i])
