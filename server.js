@@ -25,6 +25,7 @@ app.use(express.static("public"));
 
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
+mongoose.Promise = Promise;
 
 if (process.env.MONGODB_URI) {
 
@@ -32,7 +33,6 @@ if (process.env.MONGODB_URI) {
 
 }
  else {
-mongoose.Promise = Promise;
 mongoose.connect("mongodb://localhost/Scraper_DB", {
   useMongoClient: true
 });
