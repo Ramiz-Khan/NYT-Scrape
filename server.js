@@ -69,7 +69,7 @@ for (i=0 ; i < result.length; i ++) {
     };
   });
 });
-
+});
 // Route for getting all Articles from the db
 app.get("/articles", function(req, res) {
   // Grab every document in the Articles collection
