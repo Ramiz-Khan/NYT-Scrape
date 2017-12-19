@@ -31,22 +31,25 @@ if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI);
 
 } else {
+
   mongoose.Promise = Promise;  
   mongoose.connect("mongodb://localhost/Scraper_DB", {
   useMongoClient: true
   });
- }
+ 
+}
+
 // Routes
 
 // A GET route for scraping the Dallas Morning News website
-app.get("/", function(req, res) {
+app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
   axios.get("https://www.dallasnews.com/").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
     // Now, we grab every h3 within an article tag, and do the following:
-    $("h3").each(function(i, element) {
+    $("a").each(function(i, element) {
       // Save an empty result object
       var result = {};
 
@@ -82,7 +85,7 @@ for (i=0 ; i < result.length; i ++) {
 app.get("/articles", function(req, res) {
   // Grab every document in the Articles collection
   db.Article
-    .find({})
+    .find({}).sort({datefield: -1})
     .then(function(dbArticle) {
       // If we were able to successfully find Articles, send them back to the client
       res.json(dbArticle);
@@ -111,7 +114,7 @@ app.get("/articles/:id", function(req, res) {
 });
 
 // Route for saving/updating an Article's associated Note
-app.post("/articles/:id", function(req, res) {
+app.post("/articles", function(req, res) {
   // Create a new note and pass the req.body to the entry
   db.Note
     .create(req.body)

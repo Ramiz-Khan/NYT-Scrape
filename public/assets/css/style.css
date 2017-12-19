@@ -1,0 +1,31 @@
+a {
+    font-family: helvetica;
+    color: #16c5b5;
+}
+
+li {
+    list-style: none;
+}
+
+h1 {
+    font-family: helvetica;
+    color: white;
+}
+
+.col-lg-8 {
+    padding: 20px;
+    margin-top: 20px;
+ 
+}
+
+.panel {
+    background: transparent;
+}
+
+.jumbotron  {
+    background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/doodles.png");
+}
+
+.results-row {
+    background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/darkness.png");
+}
